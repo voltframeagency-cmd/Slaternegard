@@ -36,7 +36,7 @@
       };
     </script>
     <style>
-      body { background-color: #F9F7F2; color: #2D2D2D; }
+      body { background-color: #F9F7F2; color: #2D2D2D; margin: 0; padding: 0; }
       #root:empty::before {
         content: "Laddar Slätterne Gård...";
         display: flex;
@@ -48,36 +48,76 @@
         color: #C5A059;
         font-size: 1.5rem;
       }
+      #error-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: #fff; color: #721c24; padding: 40px;
+        z-index: 9999; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        border-top: 5px solid #721c24;
+      }
+      #error-overlay h1 { font-family: 'Playfair Display', serif; margin-bottom: 20px; }
+      #error-overlay pre { background: #f8d7da; padding: 20px; border-radius: 8px; overflow: auto; white-space: pre-wrap; word-break: break-all; }
       ::-webkit-scrollbar { width: 8px; }
       ::-webkit-scrollbar-track { background: #F9F7F2; }
       ::-webkit-scrollbar-thumb { background: #C5A059; border-radius: 10px; }
       .reveal { opacity: 0; transform: translateY(40px); transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
       .reveal.active { opacity: 1; transform: translateY(0); }
-      .gold-link { position: relative; text-decoration: none; }
-      .gold-link::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -4px; left: 0; background-color: #C5A059; transition: width 0.4s; }
-      .gold-link:hover::after { width: 100%; }
-      @keyframes slow-zoom { from { transform: scale(1); } to { transform: scale(1.08); } }
-      .animate-slow-zoom { animation: slow-zoom 25s infinite alternate ease-in-out; }
-      .scrollbar-hide::-webkit-scrollbar { display: none; }
-      .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
-  <script type="importmap">
+    
+    <script type="importmap">
 {
   "imports": {
-    "@google/genai": "https://esm.sh/@google/genai@^1.37.0",
-    "react": "https://esm.sh/react@^19.2.3",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react-dom": "https://esm.sh/react-dom@^19.2.3",
-    "react-dom/client": "https://esm.sh/react-dom@^19.2.3/client",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+    "@google/genai": "https://esm.sh/@google/genai@1.37.0",
+    "react": "https://esm.sh/react@19.0.0",
+    "react-dom": "https://esm.sh/react-dom@19.0.0",
+    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
+    "lucide-react": "https://esm.sh/lucide-react@0.460.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/"
   }
 }
 </script>
-</head>
+  </head>
   <body>
     <div id="root"></div>
-    <!-- type="text/babel" tells Babel to transpile this. data-type="module" enables ESM. -->
-    <script type="text/babel" data-type="module" src="./index.tsx"></script>
+    <div id="error-overlay">
+      <h1>Hoppsan! Programmet kunde inte startas.</h1>
+      <p>Detta beror oftast på att webbläsaren blockerar .tsx-filer eller att det finns ett problem med anslutningen till GitHub.</p>
+      <pre id="error-content"></pre>
+      <div style="margin-top: 20px;">
+        <p style="font-size: 0.9em; color: #666;">Felsökningstips för Opera:</p>
+        <ul style="font-size: 0.85em; color: #666; list-style: disc; margin-left: 20px;">
+          <li>Inaktivera tillfälligt "Opera Turbo" eller annonsblockerare.</li>
+          <li>Kontrollera att JavaScript är aktiverat.</li>
+          <li>Öppna konsolen (Ctrl+Shift+I) för detaljerade felmeddelanden.</li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      // Diagnostic tool to show errors on screen if the app fails to load
+      window.onerror = function(msg, url, line, col, error) {
+        var overlay = document.getElementById('error-overlay');
+        var content = document.getElementById('error-content');
+        if (overlay && content) {
+          overlay.style.display = 'block';
+          content.textContent = msg + '\n\nKälla: ' + url + '\nPosition: ' + line + ':' + col + (error ? '\nStack: ' + error.stack : '');
+        }
+      };
+
+      // Handle unhandled promise rejections (like failed imports)
+      window.onunhandledrejection = function(event) {
+        var overlay = document.getElementById('error-overlay');
+        var content = document.getElementById('error-content');
+        if (overlay && content) {
+          overlay.style.display = 'block';
+          content.textContent = 'Unhandled Promise Rejection: ' + event.reason;
+        }
+      };
+    </script>
+
+    <!-- index.tsx loading -->
+    <script type="text/babel" data-presets="react,typescript" data-type="module" src="./index.tsx"></script>
   </body>
 </html>
