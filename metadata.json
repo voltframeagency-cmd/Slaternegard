@@ -1,0 +1,8 @@
+{
+  "name": "reframable Slätterne Gård – The Icelandic Horse Estate",
+  "description": "A premium digital experience for Slätterne Gård, showcasing elite Icelandic horse breeding, high-competence education, and luxury equestrian tours.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
