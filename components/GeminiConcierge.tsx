@@ -1,8 +1,8 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, X, Bot, User as UserIcon, Loader2, Sparkles, MapPin, Calendar, Info } from 'lucide-react';
-import { getConciergeResponseStream } from '../geminiService';
-import { Message } from '../types';
+import { getConciergeResponseStream } from '../geminiService.ts';
+import { Message } from '../types.ts';
 
 interface GeminiConciergeProps {
   onClose: () => void;
@@ -21,11 +21,6 @@ const GeminiConcierge: React.FC<GeminiConciergeProps> = ({ onClose }) => {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages, isLoading]);
-
-  const handleSuggestion = (suggestion: string) => {
-    setInput(suggestion);
-    // Auto-submit would be even better for CRO
-  };
 
   const handleSubmit = async (e: React.FormEvent | string) => {
     if (typeof e !== 'string') e.preventDefault();
@@ -109,23 +104,9 @@ const GeminiConcierge: React.FC<GeminiConciergeProps> = ({ onClose }) => {
             </div>
           </div>
         ))}
-        {isLoading && !messages[messages.length - 1].content && (
-          <div className="flex justify-start">
-            <div className="flex gap-4">
-              <div className="w-8 h-8 rounded-full bg-white border border-gold/20 flex items-center justify-center shrink-0">
-                <Bot size={12} className="text-forest animate-pulse" />
-              </div>
-              <div className="p-5 rounded-2xl bg-white/50 text-charcoal/40 text-xs italic flex items-center gap-2 border border-dashed border-gold/20">
-                <Loader2 size={12} className="animate-spin text-gold" />
-                Analyserar din förfrågan...
-              </div>
-            </div>
-          </div>
-        )}
       </div>
 
       <div className="p-6 bg-white border-t border-stone flex flex-col gap-4">
-        {/* CRO: Quick Suggestions nudge users toward high-value intents */}
         <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
           {suggestions.map((s, i) => (
             <button 

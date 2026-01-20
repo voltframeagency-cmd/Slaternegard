@@ -12,13 +12,13 @@ import {
   User,
   Presentation
 } from 'lucide-react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Services from './components/Services';
-import StallionSection from './components/StallionSection';
-import Accommodation from './components/Accommodation';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+import Navbar from './components/Navbar.tsx';
+import Hero from './components/Hero.tsx';
+import Services from './components/Services.tsx';
+import StallionSection from './components/StallionSection.tsx';
+import Accommodation from './components/Accommodation.tsx';
+import Contact from './components/Contact.tsx';
+import Footer from './components/Footer.tsx';
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -128,7 +128,7 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        {/* VEO Preparation: Cinematic Visual Gallery - UPDATED WITH BARN IMAGES */}
+        {/* VEO Preparation: Cinematic Visual Gallery */}
         <section className="bg-white py-32 overflow-hidden">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-col md:flex-row gap-12 items-center mb-24 reveal">
@@ -248,7 +248,7 @@ const App: React.FC = () => {
         </section>
       </main>
 
-      {/* WhatsApp Floating Contact Button - Styled to match the website's premium aesthetic */}
+      {/* WhatsApp Floating Contact Button */}
       <a 
         href="https://wa.me/46702077375"
         target="_blank"

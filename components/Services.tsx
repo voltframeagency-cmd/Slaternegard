@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Clock, Info, ChevronRight, Sparkles } from 'lucide-react';
-import { ServiceCardProps } from '../types';
+import { ServiceCardProps } from '../types.ts';
 
 const ServiceCard: React.FC<ServiceCardProps & { staggerClass?: string }> = ({ 
   title, description, price, duration, inclusions, constraint, image, staggerClass 

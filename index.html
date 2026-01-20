@@ -4,67 +4,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- PRIMARY SEO: Traditional Search Dominance -->
+
+    <!-- PRIMARY SEO -->
     <title>Slätterne Gård | Exklusiv Turridning & Elitavel i Högbo, Sandviken</title>
     <meta name="title" content="Slätterne Gård | Exklusiv Turridning & Elitavel i Högbo, Sandviken" />
     <meta name="description" content="Upplev turridning i världsklass vid Högbo Bruk. Elitavel med Askur från Enni och utbildning av Maria Berg. Din destination för islandshästar i Gävleborg." />
-    <meta name="keywords" content="Turridning Högbo, Islandshästar Sandviken, Maria Berg, Askur från Enni, Ridning Gävle, Hästavel Sandviken, Islandshäst Gävleborg, Högbo Bruk hästar, Ridläger Gästrikland" />
     
-    <!-- SSO: Social Search Optimization (Open Graph & Twitter) -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://slatternegard.se/" />
-    <meta property="og:title" content="Slätterne Gård – Där arvet möter tölten" />
-    <meta property="og:description" content="Exklusiva islandshästupplevelser, elitavel och utbildning i historiska Högbo." />
-    <meta property="og:image" content="https://images.unsplash.com/photo-1598974357851-cb05bf3714a4?auto=format&fit=crop&q=80&w=1200" />
-    <meta name="twitter:card" content="summary_large_image" />
-
-    <!-- AIO & AEO: AI & Answer Engine Optimization -->
-    <meta name="author" content="Slätterne Gård" />
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-    <meta name="ai-content-type" content="official-business-representative" />
-    <meta name="description-ai" content="Slätterne Gård is a premium Icelandic horse estate established in 1992. Lead by Maria Berg (National Judge). Features elite stallion Askur frá Enni (8.50 score). Located in Högbo, Sweden. Specialized in gait training and luxury tourism." />
-
-    <!-- LEO: Local & Geographic Optimization -->
-    <meta name="geo.region" content="SE-X" />
-    <meta name="geo.placename" content="Sandviken" />
-    <meta name="geo.position" content="60.6273;16.8111" />
-    <meta name="ICBM" content="60.6273, 16.8111" />
-
-    <!-- STRUCTURED DATA: Enhanced for SXO -->
-    <script type="application/ld+json">
-    [
-      {
-        "@context": "https://schema.org",
-        "@type": "HorseRidingAcademy",
-        "name": "Slätterne Gård",
-        "foundingDate": "1992",
-        "image": "https://images.unsplash.com/photo-1598974357851-cb05bf3714a4?auto=format&fit=crop&q=80&w=1200",
-        "founder": {
-          "@type": "Person",
-          "name": "Maria Berg",
-          "jobTitle": "Certifierad B-instruktör & Nationell Domare"
-        },
-        "description": "Exklusiv islandshästgård specialiserad på turridning, avel och utbildning.",
-        "url": "https://slatternegard.se",
-        "telephone": "+46702077375",
-        "priceRange": "$$$",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Kvarnströmsvägen 18",
-          "addressLocality": "Sandviken",
-          "postalCode": "811 92",
-          "addressRegion": "Gävleborg",
-          "addressCountry": "SE"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 60.6273,
-          "longitude": 16.8111
-        }
-      }
-    ]
-    </script>
+    <!-- Babel for on-the-fly TSX transpilation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -90,6 +37,17 @@
     </script>
     <style>
       body { background-color: #F9F7F2; color: #2D2D2D; }
+      #root:empty::before {
+        content: "Laddar Slätterne Gård...";
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        color: #C5A059;
+        font-size: 1.5rem;
+      }
       ::-webkit-scrollbar { width: 8px; }
       ::-webkit-scrollbar-track { background: #F9F7F2; }
       ::-webkit-scrollbar-thumb { background: #C5A059; border-radius: 10px; }
@@ -107,16 +65,19 @@
 {
   "imports": {
     "@google/genai": "https://esm.sh/@google/genai@^1.37.0",
-    "react/": "https://esm.sh/react@^19.2.3/",
     "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react-dom": "https://esm.sh/react-dom@^19.2.3",
+    "react-dom/client": "https://esm.sh/react-dom@^19.2.3/client",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
   }
 }
 </script>
 </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="./index.tsx"></script>
+    <!-- type="text/babel" tells Babel to transpile this. data-type="module" enables ESM. -->
+    <script type="text/babel" data-type="module" src="./index.tsx"></script>
   </body>
 </html>
